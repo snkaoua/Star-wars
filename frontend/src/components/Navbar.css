@@ -1,0 +1,124 @@
+/* The main header bar at the top of the page */
+.sw-header {
+  /* Makes the header "stick" to the top when scrolling */
+  position: sticky;
+  top: 0;
+
+  /* Put the header above most other elements */
+  z-index: 50;
+
+  /* Dark space-style background using a radial gradient:
+     - starts from a purple-ish color at the top center
+     - transitions to darker colors towards the edges */
+  background: radial-gradient(
+    circle at top,
+    #22113a 0,
+    #050509 40%,
+    #000 100%
+  );
+
+  /* Thin, semi-transparent white line at the bottom of the header */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Adds a blur effect to whatever is behind the header (glassmorphism) */
+  backdrop-filter: blur(10px);
+}
+
+/* Inner container for the header content (logo + navigation) */
+.sw-header-inner {
+  /* Limit the width of the content so it doesn’t stretch too wide */
+  max-width: 1100px;
+
+  /* Center the inner content horizontally */
+  margin: 0 auto;
+
+  /* Vertical and horizontal padding inside the header */
+  padding: 0.75rem 1.5rem;
+
+  /* Use flexbox layout to arrange children in a row */
+  display: flex;
+
+  /* Vertically center logo and navigation items */
+  align-items: center;
+
+  /* Place logo on the left, nav links on the right */
+  justify-content: space-between;
+}
+
+/* Logo styling (probably a text logo) */
+.sw-logo {
+  /* Slightly bigger font size for the logo */
+  font-size: 1.3rem;
+
+  /* Make the logo text bold */
+  font-weight: 700;
+
+  /* Add spacing between letters for a “tech” look */
+  letter-spacing: 0.15em;
+
+  /* All letters in uppercase */
+  text-transform: uppercase;
+
+  /* Remove underline from the logo link */
+  text-decoration: none;
+
+  /* Logo text color: white */
+  color: #fff;
+}
+
+/* Highlighted part of the logo inside a span element */
+.sw-logo span {
+  /* Use a yellow color to emphasize part of the logo */
+  color: #ffd60a;
+}
+
+/* Navigation container (the links area) */
+.sw-nav {
+  /* Display nav links in a horizontal row */
+  display: flex;
+
+  /* Space between each navigation link */
+  gap: 1.2rem;
+}
+
+/* Individual navigation link style */
+.sw-nav-link {
+  /* Slightly smaller text than the logo */
+  font-size: 0.95rem;
+
+  /* Remove default underline from links */
+  text-decoration: none;
+
+  /* Uppercase letters for a consistent menu style */
+  text-transform: uppercase;
+
+  /* Letter spacing for a more “designed” look */
+  letter-spacing: 0.12em;
+
+  /* Default color: semi-transparent white */
+  color: rgba(255, 255, 255, 0.7);
+
+  /* Extra space below link to show an underline border in the right position */
+  padding-bottom: 0.3rem;
+
+  /* Start with no visible bottom border (transparent) */
+  border-bottom: 2px solid transparent;
+
+  /* Smooth animation when color and border-color change */
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hover effect for navigation links */
+.sw-nav-link:hover {
+  /* On hover: make the text fully white */
+  color: #fff;
+}
+
+/* Style for the currently active page link */
+.sw-nav-link.active {
+  /* Active link: use yellow color like the logo accent */
+  color: #ffd60a;
+
+  /* Show a yellow bottom border like an underline to mark the active page */
+  border-color: #ffd60a;
+}

@@ -1,42 +1,824 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* ====== APP LAYOUT (ROOT, MAIN, FOOTER) ====== */
+
+/* Root container of the app (usually wraps header, main, footer) */
+.app-root {
+  /* Make the app fill at least the full viewport height */
+  min-height: 100vh;
+  /* Use flexbox so we can push the footer to the bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area (between header and footer) */
+.app-main {
+  /* Take up remaining vertical space so footer stays at bottom */
+  flex: 1;
+}
+
+/* Footer at the bottom of the app */
+.app-footer {
   text-align: center;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+  /* Dark spacey gradient from bottom up */
+  background: radial-gradient(
+    circle at bottom,
+    #161627 0,
+    #050509 40%,
+    #000 100%
+  );
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Generic page wrapper (used before you introduced page-contained as "card") */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* First definition of page-contained: 
+   a glassy card-like container inside the page.
+   ⚠️ Note: you redefine .page-contained later with slightly different styles.
+   The later definition will override this one. */
+.page-contained {
+  background: linear-gradient(
+    135deg,
+    rgba(7, 7, 13, 0.9),
+    rgba(12, 12, 30, 0.9)
+  );
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  margin-top: 2.5rem;
+}
+
+/* Default heading style inside .page containers */
+.page h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+
+/* ====== OLD HOME / HERO STYLES (SEPARATE LAYOUT) ====== */
+
+.home-page {
+  padding-top: 1.5rem;
+}
+
+/* Standalone hero component (not the same as .home-hero below) */
+.hero {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 330px;
+  display: flex;
+  align-items: center;
+  padding: 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+  background: radial-gradient(circle at top, #2b214b 0, #050509 50%, #000 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+}
+
+/* Overlay layer on top of the hero for light/glow effects */
+.hero-overlay {
+  position: absolute;
+  inset: 0; /* same as top:0; right:0; bottom:0; left:0 */
+  background:
+    radial-gradient(circle at top left, rgba(255, 214, 10, 0.3), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(135, 206, 250, 0.25), transparent 50%);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+/* Main text content inside the hero */
+.hero-content {
+  position: relative;
+  max-width: 620px;
+  z-index: 1; /* above the overlay */
+}
+
+/* Small label above the hero title */
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.75rem;
+}
+
+/* Hero title text */
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  text-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+}
+
+/* Highlight part of the hero title */
+.hero-title span {
+  display: block;
+  color: #ffd60a;
+}
+
+/* Hero subtitle text (description under main title) */
+.hero-subtitle {
+  max-width: 540px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.98rem;
+  margin-bottom: 1.6rem;
+}
+
+/* Container for hero buttons */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Generic hero button */
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Primary hero button style */
+.hero-btn.primary {
+  background: linear-gradient(120deg, #ffd60a, #f48c06);
+  color: #000;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* Secondary hero button style */
+.hero-btn.secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Hover state for both hero buttons */
+.hero-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+}
+
+
+/* ====== GENERIC FEATURE GRID SECTION ====== */
+
+.feature-section {
+  margin-bottom: 2rem;
+}
+
+/* Responsive grid of feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.3rem;
+}
+
+/* Single feature card */
+.feature-card {
+  background: rgba(7, 7, 15, 0.9);
+  border-radius: 16px;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Title inside a feature card */
+.feature-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ====== FIRST MOVIES TABLE (OLDER VERSION) ====== */
+/* Note: later you redefine .movies-table with more detailed styles. */
+
+.movies-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.movies-table th,
+.movies-table td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.movies-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+
+/* ====== RESPONSIVE ADJUSTMENTS FOR HEADER & HERO ====== */
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 2.2rem 1.4rem;
   }
-  to {
-    transform: rotate(360deg);
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .sw-header-inner {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* ====== GLOBAL HEADINGS & LOGO FONT ====== */
+
+h1,
+h2,
+h3,
+.sw-logo-text {
+  font-family: 'Pathway Gothic One', system-ui, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ====== PRIMARY & GHOST BUTTONS (used in HomePage) ====== */
+
+/* Solid primary button (orange/yellow gradient) */
+.sw-btn-primary {
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #f7b500, #ff7a00);
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.sw-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.05);
+}
+
+/* Outline / ghost button */
+.sw-btn-ghost {
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #f8f9fa;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.sw-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+  border-color: #ffd54a;
+}
+
+/* ====== NEWER PAGE-CONTAINED (OVERRIDES PREVIOUS ONE) ====== */
+/* This definition comes later, so it wins over the earlier version. */
+
+.page-contained {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  padding: 2.5rem 2.8rem;
+  border-radius: 24px;
+
+  /* Soft radial highlight plus dark background */
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 55%),
+    rgba(5, 5, 15, 0.92);
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+/* Big page title style (used for some pages) */
+.page-title {
+  font-family: 'Pathway Gothic One', system-ui, sans-serif;
+  font-size: 3.2rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+/* Subtitle text under a page title */
+.page-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 2.2rem;
+}
+
+
+/* ====== HOME HERO (CURRENT VERSION USED BY HomePage) ====== */
+
+.home-hero {
+  padding: 3rem 3rem 3.5rem;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.10), transparent 55%),
+    rgba(3, 3, 15, 0.96);
+}
+
+/* Small text above the main hero title */
+.home-tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+/* Main home page hero title */
+.home-title {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+/* Highlight part of title in yellow */
+.home-title span {
+  color: #ffd54a;
+}
+
+/* Subtitle under hero title */
+.home-subtitle {
+  max-width: 40rem;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 2rem;
+}
+
+/* Container for hero buttons on home page */
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+/* ====== HOME CARDS SECTION ====== */
+
+.home-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* Single card under the hero (e.g. Character Search, Movie Timeline) */
+.home-card {
+  padding: 1.6rem 1.8rem;
+  border-radius: 18px;
+  background: rgba(5, 5, 20, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+.home-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: #ffd54a;
+}
+
+.home-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive adjustments for home hero on tablets/phones */
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 2.2rem 1.7rem 2.8rem;
+  }
+
+  .home-title {
+    font-size: 2.2rem;
+  }
+
+  .home-subtitle {
+    font-size: 0.98rem;
   }
 }
 
-.card {
-  padding: 2em;
+
+/* ====== MOVIES PAGE STYLES (SECOND, MORE DETAILED VERSION) ====== */
+
+.movies-page h1 {
+  font-size: 2.4rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-.read-the-docs {
+.movies-intro {
+  max-width: 44rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 1.8rem;
+}
+
+/* Wrapper for the movies table (adds scroll on small screens) */
+.movies-table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+  background: rgba(3, 3, 15, 0.95);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Newer definition of movies-table:
+   - full-width
+   - min-width ensures it doesn't collapse too much on small screens. */
+.movies-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.movies-table th,
+.movies-table td {
+  padding: 0.85rem 1.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.movies-table th {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hover row highlight in movies table */
+.movies-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+
+/* ====== PILL BADGES (TYPE & ERA) ====== */
+
+/* Base pill style for labels like "Saga", "Spin-off", "Prequel" etc. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+
+/* Pill variant for "Saga" movies */
+.pill-saga {
+  background: rgba(255, 213, 74, 0.1);
+  color: #ffd54a;
+  border-color: rgba(255, 213, 74, 0.7);
+}
+
+/* Pill variant for "Spin-off" movies */
+.pill-spin {
+  background: rgba(140, 200, 255, 0.08);
+  color: #9ad9ff;
+  border-color: rgba(154, 217, 255, 0.7);
+}
+
+/* Era variants: prequel, original, sequel, anthology */
+
+.pill-era-prequel {
+  background: rgba(148, 0, 211, 0.16);
+  color: #e5c3ff;
+  border-color: rgba(229, 195, 255, 0.7);
+}
+
+.pill-era-original {
+  background: rgba(0, 188, 212, 0.14);
+  color: #a6f4ff;
+  border-color: rgba(166, 244, 255, 0.7);
+}
+
+.pill-era-sequel {
+  background: rgba(76, 175, 80, 0.16);
+  color: #c8f7d1;
+  border-color: rgba(200, 247, 209, 0.7);
+}
+
+.pill-era-anthology {
+  background: rgba(255, 152, 0, 0.15);
+  color: #ffd7a1;
+  border-color: rgba(255, 215, 161, 0.7);
+}
+
+.movies-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* ====== SEARCH PAGE STYLES ====== */
+
+.search-page {
+  margin-top: 2.5rem;
+}
+
+.search-title {
+  font-size: 2.4rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1.4rem;
+}
+
+/* Top search bar area: input + button */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Search text input */
+.search-input {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #ffd54a;
+  box-shadow: 0 0 0 1px rgba(255, 213, 74, 0.5);
+}
+
+/* Status text (loading, no results, etc.) */
+.search-status {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+/* Error state for status text */
+.search-status.error {
+  color: #ff6b6b;
+}
+
+/* Wrapper for search results table */
+.search-results {
+  margin-bottom: 2rem;
+}
+
+/* Header row above the results table (title + term label) */
+.search-results-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.6rem;
+}
+
+.search-results-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.search-term-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Generic data table (used for search results & favorites) */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(3, 3, 15, 0.95);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.data-table th {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Remove bottom border on last row */
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover effect on data table rows */
+.data-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Search history section under results */
+.search-history {
+  margin-top: 1.5rem;
+}
+
+/* List of history items */
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Single history item row */
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Clickable "chip" for re-running a search term */
+.history-chip {
+  border: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.history-chip:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+/* Small number showing count per history term */
+.history-count {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+/* Small "X" delete button for history items */
+.history-delete {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.history-delete:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ff8787;
+}
+
+/* Search bar stacked vertically on small screens */
+@media (max-width: 640px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Highlight row if it's selected (for details card) */
+.data-table tr.row-selected {
+  background: rgba(255, 213, 74, 0.12);
+}
+
+/* Character details card under the results table */
+.character-card {
+  margin-top: 1.4rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: 18px;
+  background: rgba(5, 5, 20, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+}
+
+.character-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Grid layout for Height / Birth Year / Gender blocks */
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Label text inside character grid */
+.character-grid .label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Value text inside character grid */
+.character-grid .value {
+  display: block;
+  font-size: 0.98rem;
+  color: #fff;
+}
+
+/* Extra note under character details */
+.character-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Favorite star button (inside results and favorites tables) */
+.fav-star-btn {
+  border: none;
+  background: transparent;
   color: #888;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.fav-star-btn:hover {
+  color: #ffd36a;
+  transform: scale(1.1);
+}
+
+/* Active favorite state: filled yellow star */
+.fav-star-btn-active {
+  color: #ffd36a;
+}
+
+/* Ensure favorite name aligns nicely vertically with the star */
+.fav-name {
+  vertical-align: middle;
 }

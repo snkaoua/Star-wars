@@ -1,11 +1,9 @@
-/* Defines the /api/characters route and maps it to the characters controller. */   
+// Characters routes: defines the GET / endpoint and connects it to the getCharacters controller function.
 
 const express = require('express');
 const router = express.Router();
 const { getCharacters } = require('../controllers/characters');
 
-// GET /api/characters - Retrieve a list of characters
 router.get('/', getCharacters);
 
-// Export the router to be used in the main app
 module.exports = router;

@@ -1,6 +1,5 @@
 /* Catches errors and sends a consistent JSON error response. */    
 
-// Backend/middleware/errorHandler.js
 // Error handling middleware
 module.exports = (err, req, res, next) => {
     console.error('Error:', err);

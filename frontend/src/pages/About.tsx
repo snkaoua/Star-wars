@@ -1,13 +1,10 @@
-// Functional React component that renders the "About" page
+// AboutPage component: displays a short explanation about the Star Wars universe
+//  and what this app lets the user do.
+
 function AboutPage() {
   return (
-    // Outer container for the page content.
-    // "page-contained" is probably a CSS class that:
-    // - limits the width of the content,
-    // - centers it on the page,
-    // - and adds some padding/margins.
+    
     <div className="page-contained">
-      {/* Main title of the page */}
       <h1>About the Star Wars Saga</h1>
 
       
@@ -44,6 +41,5 @@ function AboutPage() {
   );
 }
 
-// Exporting the AboutPage component so it can be used in other files
-// (for example, in your router configuration)
 export default AboutPage;
+ 
